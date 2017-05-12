@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <windows.h>
+#define p printf 
 //seccion de funciones 
 void gotoxy(int x,int y)
 {
@@ -22,9 +23,9 @@ void gotoxy(int x,int y)
 void presentacion(void)
 	{//				Aqui se realiza la función que ejecuta la presentación del programa
 		gotoxy(25,2);
-		printf("FACULTAD DE INGENIER%cA \n Proyecto realizado por:\n G%cmez Arizmendi Jos%c Luis \n Mart%cnez Rosete Karol Joshua \n",214,162,130,161);
-		printf(" Rivas Vel%czquez Jos%c Joaqu%cn \n Sandoval Rodr%cguez Ruben Ulises \n Trinidad Barbero Jorge Alfredo \n",160,130,161);
-		printf(" Para la materia de: Fundamentos de programaci%cn \n Profesora:Cintia Quezada Reyez \n Grupo: 01 \n",162);
+		p("FACULTAD DE INGENIER%cA \n Proyecto realizado por:\n G%cmez Arizmendi Jos%c Luis \n Mart%cnez Rosete Karol Joshua \n",214,162,130,161);
+		p(" Rivas Vel%czquez Jos%c Joaqu%cn \n Sandoval Rodr%cguez Ruben Ulises \n Trinidad Barbero Jorge Alfredo \n",160,130,161);
+		p(" Para la materia de: Fundamentos de programaci%cn \n Profesora:Cintia Quezada Reyez \n Grupo: 01 \n",162);
 	}
 int main(){
 //Apuntuntadores para el manejo de archivos
@@ -39,6 +40,7 @@ int main(){
 	char string[]=" ";				//variable para lectura del archivo de entrada
 	char letra;						//Variable para asignación de las letras que introduce el usuario
 	char escritura []=" ";			//Variable para cadena de escritura en archivo de salida
+	char ext[5]=".txt";			//para posteriormente agregar extensión
 	//Variables auxiliares
 	int o = 0;						
 	int l = 0;
@@ -49,15 +51,16 @@ int main(){
 	//getchar();
 	system("cls"); 			//limpiar pantalla
 //Página de datos del usuario	
-	puts("Por favor, ingresa tu nombre:\n");
+	p("Por favor, ingrese su nombre (m%cximo 25 caracteres), al finalizar, presione enter \n",160);
 	fflush(stdin);
     scanf("%[^\n]s",nombreUsuario);
-    puts("Ingresa el nombre del archivo a utilizar(entrada)\n");
+    p(" %cC%cmo se va a llamar tu archivo de entrada? (sin extensi%cn) \n",168,162,162);
     fflush(stdin);
-    scanf("%[^\n]s",nombreArchivoIn);
+    gets(nombreArchivoIn);
+	strcat(nombreArchivoIn, ext);
     entrada = fopen (nombreArchivoIn , "r");
     if (entrada == NULL) 
-		perror ("Error abriendo archivo");
+		p("Error abriendo archivo");
    	else {
     	fgets (string , 1000 , entrada) != NULL;
 		fclose(entrada);
@@ -66,22 +69,22 @@ int main(){
 			l = l+1;
 			}while(string[l] != NULL);
     	}
-    puts("Ingresa el nombre del archivo a de salida, recuerda poner '.txt' al final del nombre\n");
+    ps("Ingresa el nombre del archivo a de salida, recuerda poner '.txt' al final del nombre\n");
     fflush(stdin);
    	scanf("%[^\n]s",nombreArchivoOut);
 	system("cls"); 			//limpiar pantalla
 //Página de menú y repetición
 	while(1){
-		puts("Selecciona una opcion y presiona enter");
-		puts("a) Modificacion del texto");
-		puts("b) Obtencion del texto original");
-		puts("Para salir presione 'ctrl+c'");
+		p("Selecciona una opcion y presiona enter");
+		p("a) Modificacion del texto");
+		p("b) Obtencion del texto original");
+		p("Para salir presione 'ctrl+c'");
 		menu = ' ';
 		scanf("%c",&menu);	
 		switch(menu){
 			case 'a':
 					for(int i=1;i<=5;i++){
-						puts("ingrese una letra\n");
+						p("ingrese una letra\n");
 						scanf("%c", &letra);
 						scanf("%c", &letra);
 						letra = toupper (letra);
@@ -112,24 +115,24 @@ int main(){
 								}
 						}
 					}while(string[o]!= NULL);
-					puts("El texto modificado es:");
-					printf(escritura);
+					p("El texto modificado es:");
+					p(escritura);
 					getchar();
 					getchar();
 					system("cls");
 					salida = freopen(nombreArchivoOut,"w",stdout);
-					printf(nombreUsuario);
-					printf("El texto modificado es: %s\n",escritura);
+					p(nombreUsuario);
+					p("El texto modificado es: %s\n",escritura);
 					fclose ( salida );	
 					break;
 			case 'b':
-					puts("holi2");
+					p("holi2");
 					getchar();
 					getchar();
 					system("cls");
 					break;		
 			default:
-					puts("Opcion no valida, por favor ingrese una opcion valida");
+					p("Opcion no valida, por favor ingrese una opcion valida");
 					getchar();
 					getchar();
 					system("cls");
