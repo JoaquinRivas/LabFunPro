@@ -69,9 +69,10 @@ int main(){
 			l = l+1;
 			}while(string[l] != NULL);
     	}
-    ps("Ingresa el nombre del archivo a de salida, recuerda poner '.txt' al final del nombre\n");
+    ps("%cC%cmo se va a llamar tu archivo de salida? (sin extensi%cn) \n",168,162,162);
     fflush(stdin);
-   	scanf("%[^\n]s",nombreArchivoOut);
+   	gets(nombreArchivoOut);
+	strcat(nombreArchivoOut, ext);
 	system("cls"); 			//limpiar pantalla
 //Página de menú y repetición
 	while(1){
