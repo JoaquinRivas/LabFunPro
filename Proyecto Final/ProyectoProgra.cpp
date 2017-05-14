@@ -27,6 +27,22 @@ void presentacion(void)
 		p(" Rivas Vel%czquez Jos%c Joaqu%cn \n Sandoval Rodr%cguez Ruben Ulises \n Trinidad Barbero Jorge Alfredo \n",160,130,161);
 		p(" Para la materia de: Fundamentos de programaci%cn \n Profesora:Cintia Quezada Reyez \n Grupo: 01 \n",162);
 	}
+char extraerEspacios(char cadena[25])
+	{
+		char cadena2[25];
+		int tamcad,i,e;
+		tamcad=strlen(cadena);
+		e=0;
+		for (i=0;i<=tamcad;i++)
+		{
+			if(cadena[i]!=' ')
+			{
+				cadena2[e]=cadena[i];
+				e=e+1;
+				
+			}
+					
+		}
 int main()
 	{
 		//Apuntuntadores para el manejo de archivos
