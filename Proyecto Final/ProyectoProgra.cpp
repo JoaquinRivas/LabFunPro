@@ -1,10 +1,10 @@
 //-------Proyecto final de la materia "Fundamentos de programación"-------
-//-------Se realizó por:					  -------
-//-------*Gómez Arizmendi José		 		  -------
-//-------*Martínez Rosete Karol Joshua		  -------
-//-------*Rivas Velázquez José Joaquín		  -------
-//-------*Sandoval Rodríguez Rubén Ulises	  -------
-//-------*Trinidad Barbero Jorge A. 		  -------
+//-------Se realizó por:					   -------
+//-------*Gómez Arizmendi José		 			   -------
+//-------*Martínez Rosete Karol Joshua		 		   -------
+//-------*Rivas Velázquez José Joaquín		  		   -------
+//-------*Sandoval Rodríguez Rubén Ulises	  	 	   -------
+//-------*Trinidad Barbero Jorge A. 		  		   -------
 
 #include <stdio.h>
 #include <string.h>
@@ -20,8 +20,8 @@ void gotoxy(int x,int y)
 	coord.Y=y;
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),coord);
 }
-void presentacion(void)
-	{//				Aqui se realiza la función que ejecuta la presentación del programa
+void presentacion(void)//				Aqui se realiza la función que ejecuta la presentación del programa
+	{
 		gotoxy(25,2);
 		p("FACULTAD DE INGENIER%cA \n Proyecto realizado por:\n G%cmez Arizmendi Jos%c Luis \n Mart%cnez Rosete Karol Joshua \n",214,162,130,161);
 		p(" Rivas Vel%czquez Jos%c Joaqu%cn \n Sandoval Rodr%cguez Ruben Ulises \n Trinidad Barbero Jorge Alfredo \n",160,130,161);
@@ -29,135 +29,130 @@ void presentacion(void)
 	}
 char extraerEspacios(char cadena[25])
 	{
-		char cadena2[25];
-		int tamcad,i,e;
-		tamcad=strlen(cadena);
-		e=0;
-		for (i=0;i<=tamcad;i++)
+	char cadena2[25];
+	int tamcad,i,e;
+	tamcad=strlen(cadena);
+	e=0;
+	for (i=0;i<=tamcad;i++)
 		{
-			if(cadena[i]!=' ')
+		if(cadena[i]!=' ')
 			{
-				cadena2[e]=cadena[i];
-				e=e+1;
-				
+			cadena2[e]=cadena[i];
+			e=e+1;
 			}
 					
 		}
-int main()
-	{
-		//Apuntuntadores para el manejo de archivos
-		FILE *entrada;  //origen
-		FILE *salida;  //Destino
-		//variables a utilizar
-		char nombreUsuario[25];		//Arreglo para el nombre del usuario
-		char nombreArchivoIn[16];	//Arreglo para el nombre que se le dará al archivo de entrada
-		char nombreArchivoOut[16];	//Arreglo para el nombre del archivo de salida
-		char string[]=" ";		//Arreglo para lectura del archivo de entrada
-		char matriz [6][6] = {{NULL,'1','1','1','1','1'},{'1','A','B','C','D','E'},{'1','F','G','H','I','K'},{'1','L','M','N','O','P'},{'1','Q','R','S','T','U'},{'1','V','W','X','Y','Z'}};//Arreglo bidimensional para la matriz de transformaciones
-		char menu;			//Variable para la selección en el menú
-		char letra;			//Variable para asignación de las letras que introduce el usuario
-		char escritura []=" ";		//Variable para cadena de escritura en archivo de salida
-		char ext[5]=".txt";		//para posteriormente agregar extensión
-		//Variables auxiliares
-		int o = 0;						
-		int l = 0;
-		int u = 0;
-		//Página de presentación
-		presentacion();
-		getchar();			//getchar();
-		system("cls"); 			//limpiar pantalla
-		//Página de datos del usuario	
-		p("Por favor, ingrese su nombre (m%cximo 25 caracteres), al finalizar, presione enter \n",160);
-		fflush(stdin);
+int main(){
+	//Apuntuntadores para el manejo de archivos
+	FILE *entrada;  //origen
+	FILE *salida;  //Destino
+	
+	//variables a utilizar
+	char nombreUsuario[25];		//Arreglo para el nombre del usuario
+	char nombreArchivoIn[16];	//Arreglo para el nombre que se le dará al archivo de entrada
+	char nombreArchivoOut[16];	//Arreglo para el nombre del archivo de salida
+	char string[]=" ";		//Arreglo para lectura del archivo de entrada
+	char matriz [6][6] = {{NULL,'1','1','1','1','1'},{'1','A','B','C','D','E'},{'1','F','G','H','I','K'},{'1','L','M','N','O','P'},{'1','Q','R','S','T','U'},{'1','V','W','X','Y','Z'}};//Arreglo bidimensional para la matriz de transformaciones
+	char menu;			//Variable para la selección en el menú
+	char letra;			//Variable para asignación de las letras que introduce el usuario
+	char escritura []=" ";		//Variable para cadena de escritura en archivo de salida
+	char ext[5]=".txt";		//para posteriormente agregar extensión
+	//Variables auxiliares
+	int o = 0;						
+	int l = 0;
+	int u = 0;
+	
+	//Página de presentación
+	presentacion();
+	getchar();			//getchar();
+	system("cls"); 			//limpiar pantalla
+	
+	//Página de datos del usuario	
+	p("Por favor, ingrese su nombre (m%cximo 25 caracteres), al finalizar, presione enter \n",160);
+	fflush(stdin);
     	gets(nombreUsuario);
     	p(" %cC%cmo se va a llamar tu archivo de entrada? (sin extensi%cn) \n",168,162,162);
     	fflush(stdin);
     	gets(nombreArchivoIn);
-		strcat(nombreArchivoIn, ext);
+	strcat(nombreArchivoIn, ext);
     	entrada = fopen (nombreArchivoIn , "r");
     	if (entrada == NULL) 
 			p("Error abriendo archivo");
-   		else 
-		   {
-    			fgets (string , 1000 , entrada) != NULL;
-				fclose(entrada);
-			do
-				{
-					string[l] = toupper(string[l]);
-					l = l+1;
-				}
-			while(string[l] != NULL);
-			}
-    		p("%cC%cmo se va a llamar tu archivo de salida? (sin extensi%cn) \n",168,162,162);
-    		fflush(stdin);
-   			gets(nombreArchivoOut);
-			strcat(nombreArchivoOut, ext);
-			system("cls"); 			//limpiar pantalla
-			//Página de menú y repetición
-			while(1)
-				{
-					p("Selecciona una opcion y presiona enter");
-					p("a) Modificacion del texto");
-					p("b) Obtencion del texto original");
-					p("Para salir presione 'c'");
-					menu = ' ';
-		scanf("%c",&menu);	
-		switch(menu)
-		{
+   	else{
+    	     fgets (string , 1000 , entrada) != NULL;
+	     fclose(entrada);
+	     do{
+		string[l] = toupper(string[l]);
+		l = l+1;
+		}while(string[l] != NULL);
+	     }
+    	p("%cC%cmo se va a llamar tu archivo de salida? (sin extensi%cn) \n",168,162,162);
+    	fflush(stdin);
+   	gets(nombreArchivoOut);
+	strcat(nombreArchivoOut, ext);
+	system("cls"); 			//limpiar pantalla
+	
+	//Página de menú y repetición del mismo
+	do{
+	   p("Selecciona una opcion y presiona enter\n");
+	   p("a) Modificacion del texto\n");
+	   p("b) Obtencion del texto original\n");
+	   p("Para salir presione 'c'\n");
+	   menu = ' ';
+	   scanf("%c",&menu);	
+	   switch(menu){
+			//Caso que modifica el texto		
 			case 'a':
-					for(int i=1;i<=5;i++)
-						{
-							p("ingrese una letra\n");
-							scanf("%c", &letra);
-							scanf("%c", &letra);
-							letra = toupper (letra);
-							if(letra >=65 && letra <= 90)
-								{
-									matriz[0][i] = letra;
-									matriz[i][0] = letra;
-								}
-							else
-								{
-									puts("su letra no corresponde al alfabeto inglés");	
-								}
+			   	//Sección que ingresa las letras para la codificación
+				for(int i=1;i<=5;i++)
+					{p("ingrese una letra\n");
+					 scanf("%c", &letra);
+					 scanf("%c", &letra);
+					 letra = toupper (letra);
+					 if(letra >=65 && letra <= 90)
+							{matriz[0][i] = letra;
+							 matriz[i][0] = letra;}
+					 else{
+					      puts("su letra no corresponde al alfabeto inglés");	
 						}
-					do
-					{
-						for(int i=1;i<=5;i++)
-							{
-								for(int j=1;j<=5;j++)
-									{
-										if(string[o] ==32)
-											{
-												string[o]=NULL;
-												o = o + 1;
-											}
-										else
-											{
-												if(string[o] == matriz[i][j])
-													{
-														escritura[u] = matriz[i][0];
-														u = u+1;
-														escritura[u] = matriz[0][j];
-														string[o]=NULL;
-														o = o + 1;
-														u = u+1;
-													}
-											}
-									}
-							}
 					}
-					while(string[o]!= NULL);
-					p("El texto modificado es:");
-					p(escritura);
-					getchar();
-					getchar();
-					system("cls");
-					salida = freopen(nombreArchivoOut,"w",stdout);
-					p(nombreUsuario);
-					p("El texto modificado es: %s\n",escritura);
-					fclose ( salida );	
-					break;
+			   	//Sección que codifica el texto
+				do{
+				   for(int i=1;i<=5;i++){
+					for(int j=1;j<=5;j++){
+						if(string[o] ==32)
+							{
+							string[o]=NULL;
+							o = o + 1;
+							}
+						else
+						     {
+						      if(string[o] == matriz[i][j])
+								{
+							 	 escritura[u] = matriz[i][0];
+								 u = u+1;
+								 escritura[u] = matriz[0][j];
+								 string[o]=NULL;
+								 o = o + 1;
+								 u = u+1;
+								 }
+						      }
+							    }	//Llave del segundo ciclo
+							}	//Llave del primer ciclo
+					}while(string[o]!= NULL);
+				 p("El texto modificado es:");
+				 p(escritura);
+				 getchar();
+				 getchar();
+				 system("cls");
+				 
+			   	 //Sección  que crea y escribe en el archivo de salida
+			   	 salida = freopen(nombreArchivoOut,"w",stdout);
+				 p(nombreUsuario);
+				 p("El texto modificado es: %s\n",escritura);
+				 fclose ( salida );	
+				 break;
+			   
 			case 'b':
 					p("holi2");
 					getchar();
@@ -165,17 +160,18 @@ int main()
 					system("cls");
 					break;		
 			case 'c':
-					p("adiós");
+			   		p("usted ha decidido salir, adi%cs",162);
+					getchar();
+					getchar();
+			   		system("cls");
+			   		break;
 			default:
 					p("Opcion no valida, por favor ingrese una opcion valida");
 					getchar();
 					getchar();
 					system("cls");
 					break;
-		}
-	}
-	printf("usted ha decidido salir, adios");
-	getchar();
-	getchar();
+		}	//Llave del switch
+	}while(menu != 'c');
 	return 0;
-}
+}			//Llave del main
